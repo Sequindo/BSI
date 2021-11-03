@@ -1,0 +1,2 @@
+#ignore CMake build files
+build/
