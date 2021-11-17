@@ -41,9 +41,9 @@ public:
             "-proportional: calculate the probability that a fault part comes from a N plant, based on values provided.\n"
             "-prod: specify a proportion of production for a N plant. N is based on the order of the arguments + float (0.0,1.0)\n"
             "-nondef: specify a PROBABILITY OF A NON-DEFECTIVE product coming from a N plant. N is based on the order of the arguments. + float(0.0,1.0)\n"
-            "-operating_t: specify a real operating time of a device. + (int)\n"
+            "-operating_t: specify a real operating time of a device in HOURS. + (int)\n"
             "-fnum: specify a numer of failures to calculate a random failure rate. + (int)\n"
-            "-ftime: specify a time interval to calculate a random failure rate. + (long)\n"
+            "-ftime: specify a time interval to calculate a random failure rate in SECONDS. + (long)\n"
         };
         out << str;
     }

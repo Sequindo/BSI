@@ -1,10 +1,34 @@
 #include <iostream>
+#include <math.h>
 
 class Solver {
 
 public:
     static void proportionalSolve(std::vector<float>& prod_p, std::vector<float>& nondef_p)
     {
+        /*
+            float prob_of_defective_product_from_plant_b(float a_prod, float b_prod, float c_prod,float a_non_def,float b_non_def,float c_non_def){
+    float a_def = 1 - a_non_def, b_def = 1 - b_non_def, c_def = 1 - c_non_def;
+
+     return (b_prod * b_def) / (a_prod * a_def + b_prod * b_def + c_prod * c_def);
+
+}
+
+int main(int argc, char const *argv[])
+{
+    float a,b,c,a1,b1,c1;
+    cout << "Please insert proportions of production of three plants, from A to C: "<<endl;
+    cin >> a >> b >> c;
+    cout << "Please insert probability of non-defective product coming from each plant, from A to B: "<<endl;
+    cin >> a1 >> b1 >> c1;
+
+    cout << "_____________________________________________________________________________________"<<endl;
+
+    cout << "Probability, that the defective product comes from plant B equals:  "
+    << prob_of_defective_product_from_plant_b(a,b,c,a1,b1,c1)<<endl;
+    return 0;
+}
+        */
         if(prod_p.size()!=nondef_p.size())
             throw std::string("Both vectors must be the same size.\n");
         if(prod_p.empty() || nondef_p.empty())
@@ -94,6 +118,16 @@ public:
 
     static void failureProbSolver(int failures_number, long ftime, int operating_hrs)
     {
+        ftime = ftime/60.0;
+        float mtbf = ftime/failures_number;
+        float fail_rate = 1.0/mtbf;
+        auto prob_calc = [=](int hrs, float mtbf) -> float {
+            return 1.0 - pow(M_E,(-static_cast<float>(operating_hrs)/mtbf));
+        };
+        for(int i=0;i<10;i++)
+        {
+            std::cout << "Probability that a device will suffer from " << i << " failures after " << operating_hrs << " hrs, is (%): " << pow(prob_calc(operating_hrs, mtbf),i) << std::endl;
+        }
         return;
     }
 
