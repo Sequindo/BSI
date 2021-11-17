@@ -8,6 +8,7 @@ enum CalculatingOptions
     PARALLEL_REL = 0,
     SERIAL_REL = 1,
     PROPORTIONAL = 2,
+    CARD_DECK = 3,
     NONE_SPECIFIED = -1
 };
 
@@ -30,6 +31,7 @@ public:
             "-num: specify the number of units (e.g. devices) + (unsigned int)\n"
             "-rel: specify the common reliability of units (e.g. devices) + (float from a range (0.0,1.0))\n"
             "-parallel: calculate the probability of m of n units remaining operative, based on reliability factor provided\n"
+            "-deck: calculate the probability using deck of cards\n"
             "-proportional: calculate the probability that a fault part comes from a N plant, based on values provided.\n"
             "-prod: specify a proportion of production for a N plant. N is based on the order of the arguments + float (0.0,1.0)\n"
             "-nondef: specify a PROBABILITY OF A NON-DEFECTIVE product coming from a N plant. N is based on the order of the arguments. + float(0.0,1.0)\n"
@@ -53,13 +55,17 @@ public:
             {
                 options = PROPORTIONAL;
             } //ok
+            else if(strcmp(argv[i],"-deck")==0)
+            {
+                options = CARD_DECK;
+            } //ok
             else if(strcmp(argv[i],"-rel")==0)
             {
                 reliability = atof(argv[++i]);
             } //ok
             else if(strcmp(argv[i],"-num")==0)
             {
-                numberOfUnits = atof(argv[++i]);
+                numberOfUnits = atoi(argv[++i]);
             } //ok
             else if(strcmp(argv[i],"-prod")==0)
             {
@@ -70,18 +76,25 @@ public:
                 nondef_p.push_back(atof(argv[++i]));
             } //ok
         }
-        switch(options)
-        {
-            case(PARALLEL_REL):
-                Solver::parallelSolve(numberOfUnits, reliability);
-                break;
-            case(PROPORTIONAL):
-                Solver::proportionalSolve(prod_p, nondef_p);
-                break;
-            default:
-                std::cout << "Something went wrong\n Maybe it will help...\n";
-                printHelp(std::cout);
-                break;
-        }       
+        try {
+            switch(options)
+            {
+                case(PARALLEL_REL):
+                    Solver::parallelSolve(numberOfUnits, reliability);
+                    break;
+                case(PROPORTIONAL):
+                    Solver::proportionalSolve(prod_p, nondef_p);
+                    break;
+                case(CARD_DECK):
+                    Solver::cardDeckSolver();
+                    break;
+                default:
+                    std::cout << "Something went wrong\n Maybe it will help...\n";
+                    printHelp(std::cout);
+                    break;
+            }
+        } catch(std::string& e){
+            std::cout << e << std::endl;
+        }    
     }
 };
