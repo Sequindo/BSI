@@ -92,6 +92,11 @@ public:
         return;
     }
 
+    static void failureProbSolver(int failures_number, long ftime, int operating_hrs)
+    {
+        return;
+    }
+
     static int binomial(uint8_t n, uint8_t k)
     {
         return factorial(n)/(factorial(k)*factorial(n-k));
