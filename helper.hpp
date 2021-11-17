@@ -79,7 +79,7 @@ public:
                 Solver::proportionalSolve(prod_p, nondef_p);
                 break;
             default:
-                std::cout << "Something went wrong\n Maybe it will help...";
+                std::cout << "Something went wrong\n Maybe it will help...\n";
                 printHelp(std::cout);
                 break;
         }       

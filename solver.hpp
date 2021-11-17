@@ -23,12 +23,12 @@ public:
             den = den + prod_p.at(i)*(1.0 - nondef_p.at(i));
         }
         auto probability = [&](int i) -> float{
-            return (prod_p[i]*nondef_p[i])/den;
+            return (prod_p[i]*(1.0-nondef_p[i]))/den;
         };
         for(int i=0;i<prod_p.size();i++)
         {
             std::cout << "The probability that the fault part comes from plant " << i+1 << " equals: ";
-            std::cout << probability(i) << std::endl;
+            std::cout << probability(i)*100 << "%" << std::endl;
         }       
     }
 
