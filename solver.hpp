@@ -3,6 +3,34 @@
 class Solver {
 
 public:
+    static void proportionalSolve(std::vector<float>& prod_p, std::vector<float>& nondef_p)
+    {
+        std::cout << "The proportions of production of " << prod_p.size() << " plants: ";
+        for(auto& a : prod_p)
+        {
+            std::cout << a << " ";
+        }
+        std::cout << std::endl;
+        std::cout << "The probabilities of non-defective product coming from " << prod_p.size() << " plants: ";
+        for(auto& a : nondef_p)
+        {
+            std::cout << a << " ";
+        }
+        std::cout << std::endl;
+        float den = 0.0;
+        for(int i=0;i<prod_p.size();i++)
+        {
+            den = den + prod_p.at(i)*(1.0 - nondef_p.at(i));
+        }
+        auto probability = [&](int i) -> float{
+            return (prod_p[i]*nondef_p[i])/den;
+        };
+        for(int i=0;i<prod_p.size();i++)
+        {
+            std::cout << "The probability that the fault part comes from plant " << i+1 << " equals: ";
+            std::cout << probability(i) << std::endl;
+        }       
+    }
 
     static void parallelSolve(int num, float rel)
     {
