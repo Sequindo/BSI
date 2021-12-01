@@ -145,6 +145,26 @@ TEST(CardDeckTest, given1AsArgumentProperlyCalculateChancesOfNinesOnDeckTop)
     EXPECT_EQ(output, predictedOutput);
 }
 
+TEST(FailureProbTest, givenProperArgumentsProbabilityOfFailureIsProperlyCalculatedForEachCombination)
+{
+    int op_t = 300;
+    int fn = 20;
+    long ftime = 100000;
+    testing::internal::CaptureStdout();
+    Solver::failureProbSolver(fn, ftime, op_t);
+    std::string output = testing::internal::GetCapturedStdout();
+    std::string predictedOutput = "Probability that a device will suffer from 0 failures after 300 hrs, is (%): 1\n"
+        "Probability that a device will suffer from 1 failures after 300 hrs, is (%): 0.973068\n"
+        "Probability that a device will suffer from 2 failures after 300 hrs, is (%): 0.946862\n"
+        "Probability that a device will suffer from 3 failures after 300 hrs, is (%): 0.921362\n"
+        "Probability that a device will suffer from 4 failures after 300 hrs, is (%): 0.896548\n"
+        "Probability that a device will suffer from 5 failures after 300 hrs, is (%): 0.872403\n"
+        "Probability that a device will suffer from 6 failures after 300 hrs, is (%): 0.848908\n"
+        "Probability that a device will suffer from 7 failures after 300 hrs, is (%): 0.826045\n"
+        "Probability that a device will suffer from 8 failures after 300 hrs, is (%): 0.803799\n"
+        "Probability that a device will suffer from 9 failures after 300 hrs, is (%): 0.782151\n";
+    EXPECT_EQ(output, predictedOutput);
+}
 
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
