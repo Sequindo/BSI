@@ -111,7 +111,7 @@ public:
                     Solver::proportionalSolve(prod_p, nondef_p);
                     break;
                 case(CARD_DECK):
-                    Solver::cardDeckSolver();
+                    Solver::cardDeckSolver(std::cin);
                     break;
                 case(FAILURE_PROB):
                     Solver::failureProbSolver(failures_number, ftime, operating_hrs);

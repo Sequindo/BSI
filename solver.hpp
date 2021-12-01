@@ -83,7 +83,7 @@ int main(int argc, char const *argv[])
         }
     }
 
-    static void cardDeckSolver()
+    static void cardDeckSolver(std::istream &std_input)
     {
         float allCards = 52, typeOfCards;
         auto probability = [](float typeOfCards, float allCards) -> float {
@@ -93,7 +93,7 @@ int main(int argc, char const *argv[])
         std::cout << "1 - diamond, 2 - black, 3 - nine" << std::endl;
 
         int choice;
-        std::cin >> choice;
+        std_input >> choice;
 
         switch(choice) {
             case 1:
